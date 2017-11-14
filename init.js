@@ -41,7 +41,10 @@ function getLongestValidChain() {
 	$('div#loader').show();
 	jQuery.getJSON(TWEETCHAIN_API
 			+ '/getlatest?count=200&start=0', {}, function(data) {
-		fillBlockDOM('Longest Valid Chain', data);
+		fillBlockDOM('Longest Valid Chain', data, true);
+		if(data && data.length) {
+			$('span#tokenCirculation').text(data[0].block_number + 1);
+		}
 		$('div#loader').hide();
 	});
 }
@@ -55,7 +58,7 @@ function getChain(block_id) {
 	});
 }
 
-function fillBlockDOM(title, blocks) {
+function fillBlockDOM(title, blocks, no_scroll = false) {
 	if(!blocks || !blocks.length) {
 		var my_alert = getAlert('No data retrieved!');
 		$('main').prepend(my_alert);
@@ -96,7 +99,8 @@ function fillBlockDOM(title, blocks) {
 		]));
 	}
 
-	$('body').scrollTop(0);
+	if(!no_scroll)
+		$('body').scrollTop($('#latestBlock').offset().top);
 }
 
 function getAlert(text) {
