@@ -18,9 +18,70 @@
 			div#latestBlock {
 				margin: 0 auto;
 			}
+
+			#loader {
+				background-color: #000;
+				width: 100%;
+				height: 100%;
+				opacity: 0.25;
+				position: absolute;
+				left: 0;
+				top: 0;
+				z-index: 1200;
+			}
+
+			/* Center the loaderSpinner */
+			#loaderSpinner {
+				position: absolute;
+				left: 50%;
+				top: 50%;
+				z-index: 1210;
+				width: 150px;
+				height: 150px;
+				margin: -75px 0 0 -75px;
+				border: 16px solid #f3f3f3;
+				border-radius: 50%;
+				border-top: 16px solid #3498db;
+				width: 120px;
+				height: 120px;
+				-webkit-animation: spin 2s linear infinite;
+				animation: spin 2s linear infinite;
+			}
+
+			@-webkit-keyframes spin {
+				0% { -webkit-transform: rotate(0deg); }
+				100% { -webkit-transform: rotate(360deg); }
+			}
+
+			@keyframes spin {
+				0% { transform: rotate(0deg); }
+				100% { transform: rotate(360deg); }
+			}
+
+			/* Add animation to "page content" */
+			.animate-bottom {
+				position: relative;
+				-webkit-animation-name: animatebottom;
+				-webkit-animation-duration: 1s;
+				animation-name: animatebottom;
+				animation-duration: 1s
+			}
+
+			@-webkit-keyframes animatebottom {
+				from { bottom:-100px; opacity:0 }
+				to { bottom:0px; opacity:1 }
+			}
+
+			@keyframes animatebottom {
+				from{ bottom:-100px; opacity:0 }
+				to{ bottom:0; opacity:1 }
+			}
 		</style>
 	</head>
 	<body>
+		<div id="loader">
+			<div id="loaderSpinner"></div>
+		</div>
 		<header>
 			<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
 				<a class="navbar-brand" href="#">TweetChain Block Explorer</a>
@@ -45,12 +106,10 @@
 						</li>
 						-->
 					</ul>
-					<!--
 					<form class="form-inline mt-2 mt-md-0">
 						<input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-						<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+						<button class="btn btn-outline-success my-2 my-sm-0" type="submit" onclick="return search(this);">Search</button>
 					</form>
-					-->
 				</div>
 			</nav>
 		</header>
@@ -133,8 +192,8 @@
 						-->
 					</section>
 
-					<h2>Longest Valid Chain</h2>
-					<div id="longestValidChain" class="table-responsive">
+					<h2 id="chainTitle">Chain</h2>
+					<div id="chainData" class="table-responsive">
 						<table class="table table-striped">
 							<thead>
 								<tr>
