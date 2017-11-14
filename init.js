@@ -42,8 +42,42 @@ function getLongestValidChain() {
 	jQuery.getJSON(TWEETCHAIN_API
 			+ '/getlatest?count=200&start=0', {}, function(data) {
 		fillBlockDOM('Longest Valid Chain', data, true);
+
+		// Set some 'extra' data
 		if(data && data.length) {
-			$('span#tokenCirculation').text(data[0].block_number + 1);
+			var total_tokens = 0;
+
+			// Hodler hall of fame
+			const hodlers = data.reverse().reduce(function(accum, block, index) {
+				if(!accum[block.Twitter_user_screen_name])
+					accum[block.Twitter_user_screen_name] = 0;
+				// Users are granted TWIT equal to the number of child blocks they produced
+				accum[block.Twitter_user_screen_name] += data.length - index;
+				total_tokens += data.length - index;
+				return accum;
+			}, {});
+
+			// In circulation
+			$('span#tokenCirculation').text(total_tokens);
+
+			const ordered_hodlers = Object.keys(hodlers).map(function(key) {
+				return [key, hodlers[key]];
+			}).sort(function(a, b) {
+				return b[1] - a[1];
+			});
+
+			const rows = [];
+			for(const hodler of ordered_hodlers) {
+				rows.push($('<tr />').append([
+					$('<td />').append($('<a />', {
+							href: 'https://twitter.com/' + hodler[0] + '/',
+							text: hodler[0],
+							target: '_blank',
+						})),
+					$('<td />', { text: hodler[1], }),
+				]))
+			}
+			$('table#twitHodlers>tbody').html(rows);
 		}
 		$('div#loader').hide();
 	});

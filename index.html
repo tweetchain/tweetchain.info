@@ -19,6 +19,17 @@
 				margin: 0 auto;
 			}
 
+			table#twitHodlers > tbody td:first-child {
+				max-width: 100px;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+			}
+
+			table#twitHodlers > tbody td:nth-child(2) {
+				text-align: right;
+			}
+
 			#loader {
 				background-color: #000;
 				width: 100%;
@@ -162,6 +173,14 @@
 						</li>
 					</ul>
 					-->
+					<h4>TWIT hodlers</h4>
+					<table id="twitHodlers" class="table table-striped">
+						<thead>
+							<td>User</td>
+							<td>TWIT</td>
+						</thead>
+						<tbody></tbody>
+					</table>
 				</nav>
 
 				<main role="main" class="col-sm-9 ml-sm-auto col-md-10 pt-3">
@@ -175,7 +194,7 @@
 								<table class="table">
 									<tr>
 										<td>ICO Price</td>
-										<td>1 Quoted Tweet on the longest chain = 1 TWIT</td>
+										<td>1 Quoted Tweet on the longest chain<hr />1 TWIT + 1 TWIT POS (every block)</td>
 									</tr>
 									<tr>
 										<td>Token Distribution</td>
@@ -187,15 +206,13 @@
 									</tr>
 									<tr>
 										<td>Current Circulation</td>
-										<td title="Subject to change at any time"><span id="tokenCirculation">0</span> TWIT*</td>
+										<td><span id="tokenCirculation">0</span> TWIT</td>
 									</tr>
 								</table>
 
-								<!--
 								<p class="card-text">
-									TWIT is the future for verifying user engagement on Twitter.
+									We are all subject to <a href="https://twitter.com/SatoshiLite/" target="_blank">@SatoshiLite</a>'s will.
 								</p>
-								-->
 
 								<!--<a href="#" class="card-link">Quote latest tweet</a>-->
 							</div>
