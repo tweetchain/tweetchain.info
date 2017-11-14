@@ -1,27 +1,27 @@
-var TWEETCHAIN_API = "https://api.tweetchain.info:8443";
-// var TWEETCHAIN_API = "https://localhost:8443";
+// var TWEETCHAIN_API = "https://api.tweetchain.info:8443";
+var TWEETCHAIN_API = "https://localhost:8443";
 
 $(document).ready(() => {
-	window.twttr = (function(d, s, id) {
-		var js, fjs = d.getElementsByTagName(s)[0],
-			t = window.twttr || {};
-		if (d.getElementById(id)) return t;
-		js = d.createElement(s);
-		js.id = id;
-		js.src = "https://platform.twitter.com/widgets.js";
-		fjs.parentNode.insertBefore(js, fjs);
+	// window.twttr = (function(d, s, id) {
+	// 	var js, fjs = d.getElementsByTagName(s)[0],
+	// 		t = window.twttr || {};
+	// 	if (d.getElementById(id)) return t;
+	// 	js = d.createElement(s);
+	// 	js.id = id;
+	// 	js.src = "https://platform.twitter.com/widgets.js";
+	// 	fjs.parentNode.insertBefore(js, fjs);
 
-		t._e = [];
-		t.ready = function(f) {
-			t._e.push(f);
-		};
+	// 	t._e = [];
+	// 	t.ready = function(f) {
+	// 		t._e.push(f);
+	// 	};
 
-		return t;
-	} (document, "script", "twitter-wjs"));
+	// 	return t;
+	// } (document, "script", "twitter-wjs"));
 
-	twttr.ready(function() {
+	// twttr.ready(function() {
 		getLongestValidChain();
-	});
+	// });
 });
 
 function search(submitBTN) {
@@ -102,14 +102,14 @@ function fillBlockDOM(title, blocks, no_scroll = false) {
 
 	$('#latestBlock').empty();
 
-	// Create and place
-	twttr.widgets.createTweet(
-		blocks[0].id,
-		document.getElementById('latestBlock'),
-		{
-			theme: 'light'
-		}
-	);
+	// // Create and place
+	// twttr.widgets.createTweet(
+	// 	blocks[0].id,
+	// 	document.getElementById('latestBlock'),
+	// 	{
+	// 		theme: 'light'
+	// 	}
+	// );
 
 	$('h2#chainTitle').text(title);
 
