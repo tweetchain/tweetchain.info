@@ -1,6 +1,5 @@
-var TWEETCHAIN_API = "https://api.tweetchain.info:8443";
-// var TWEETCHAIN_API = "https://localhost:8443";
-
+if(!TWEETCHAIN_API)
+	var TWEETCHAIN_API = 'https://api.tweetchain.info:8443';
 $(document).ready(() => {
 	// window.twttr = (function(d, s, id) {
 	// 	var js, fjs = d.getElementsByTagName(s)[0],
