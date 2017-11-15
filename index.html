@@ -16,8 +16,12 @@
 		<script src="init.js"></script>
 
 		<style>
-			div#latestBlock {
-				margin: 0 auto;
+			div.chainData table>tbody>tr>td:nth-child(3),
+			div.chainData table>tbody>tr>td:nth-child(4) {
+				max-width: 300px;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
 			}
 
 			table#twitHodlers > tbody td:first-child {
@@ -186,20 +190,20 @@
 
 				<main role="main" class="col-sm-9 ml-sm-auto col-md-10 pt-3">
 					<div class="alert alert-warning" role="alert">
-						Please bear with us as we prepare for displaying UASF progress activated on at block #100. <a href="https://twitter.com/SatoshiLite/status/930485557444014080" target="_blank">As proposed by @SatoshiLite</a>, please use the following header format and continue the appropriate chain if you support this header format. Strictly,
+						<a href="https://twitter.com/SatoshiLite/status/930485557444014080" target="_blank">UASF notice: As proposed by @SatoshiLite</a>, please use the following header format and continue the appropriate chain if you support the "Strict100" header format. Strictly,
 
 						<pre><code>
-	##/ #TwitterCoin @otsproofbot
+##/ #TwitterCoin @otsproofbot
 
-	Your message here
+Your message here
 						</code></pre>
 
-						There must be a blank new line between the header and the message, for example:
+						There must be a blank line between the header and the message, for example:
 
 						<pre><code>
-	101/ #TwitterCoin @otsproofbot
+101/ #TwitterCoin @otsproofbot
 
-	Check out this new awesome ICO! TweetChain.info
+Check out this new awesome ICO! TweetChain.info
 						</code></pre>
 					</div>
 
@@ -243,8 +247,59 @@
 					</section>
 
 					<h2>TweetChain Block Explorer</h2>
+					<br />
+
 					<section class="row text-center placeholders">
-						<div id="latestBlock"></div>
+						<div id="latestLegacyBlock" class="col-6">
+							<h2 class="chainTitle">Longest Legacy Chain</h2>
+							<div class="chainData table-responsive">
+								<table class="table table-striped table-sm table-responsive">
+									<thead>
+										<tr>
+											<th>Block #</th>
+											<th>User</th>
+											<th>Quote</th>
+											<th>Link</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<!--
+											<td>1001</td>
+											<td>awesomeuser</td>
+											<td>test tests</td>
+											<td>http://test.com</td>
+											-->
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div id="latestStrict100Block" class="col-6">
+							<h2 class="chainTitle">Longest Strict100 Chain</h2>
+							<div class="chainData table-responsive">
+								<table class="table table-striped table-sm table-responsive">
+									<thead>
+										<tr>
+											<th>Block #</th>
+											<th>User</th>
+											<th>Quote</th>
+											<th>Link</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<!--
+											<td>1001</td>
+											<td>awesomeuser</td>
+											<td>2017-11-13T16:23:15.000Z</td>
+											<td>http://test.com</td>
+											-->
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
 						<!--
 						<div class="col-12 col-sm-12 placeholder">
 							<h4>Latest Block</h4>
@@ -267,31 +322,6 @@
 						</div>
 						-->
 					</section>
-
-					<h2 id="chainTitle">Chain</h2>
-					<div id="chainData" class="table-responsive">
-						<table class="table table-striped">
-							<thead>
-								<tr>
-									<th>Block #</th>
-									<th>User</th>
-									<th>Quote</th>
-									<th>Date</th>
-									<th>Link</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<!--
-									<td>1001</td>
-									<td>awesomeuser</td>
-									<td>2017-11-13T16:23:15.000Z</td>
-									<td>http://test.com</td>
-									-->
-								</tr>
-							</tbody>
-						</table>
-					</div>
 				</main>
 			</div>
 		</div>

@@ -19,7 +19,8 @@ $(document).ready(() => {
 	// } (document, "script", "twitter-wjs"));
 
 	// twttr.ready(function() {
-		getLongestValidChain();
+		getLongestValidChain('legacy', $('#latestLegacyBlock'), false);
+		getLongestValidChain('strict100', $('#latestStrict100Block'));
 	// });
 });
 
@@ -36,14 +37,15 @@ function search(submitBTN) {
 	return false;
 }
 
-function getLongestValidChain() {
+function getLongestValidChain(protocol = 'legacy', domelement = $('#latestLegacyBlock'), skiptokens = true) {
+
 	$('div#loader').show();
 	jQuery.getJSON(TWEETCHAIN_API
-			+ '/getlatest?count=200&start=0', {}, function(data) {
-		fillBlockDOM('Longest Valid Chain', data, true);
+			+ '/getlatest?protocol=' + protocol +'&count=200&start=0', {}, function(data) {
+		fillBlockDOM('Longest Valid Chain', data, domelement, true);
 
 		// Set some 'extra' data
-		if(data && data.length) {
+		if(!skiptokens && data && data.length) {
 			var total_tokens = 0;
 
 			// Hodler hall of fame
@@ -91,7 +93,7 @@ function getChain(block_id) {
 	});
 }
 
-function fillBlockDOM(title, blocks, no_scroll = false) {
+function fillBlockDOM(title, blocks, domelement = $('#latestLegacyBlock'), no_scroll = false) {
 	if(!blocks || !blocks.length) {
 		var my_alert = getAlert('No data retrieved!');
 		$('main').prepend(my_alert);
@@ -99,41 +101,40 @@ function fillBlockDOM(title, blocks, no_scroll = false) {
 		return;
 	}
 
-	$('#latestBlock').empty();
+	// domelement.empty();
 
 	// // Create and place
 	// twttr.widgets.createTweet(
 	// 	blocks[0].id,
-	// 	document.getElementById('latestBlock'),
+	// 	document.getElementById('latestLegacyBlock'),
 	// 	{
 	// 		theme: 'light'
 	// 	}
 	// );
 
-	$('h2#chainTitle').text(title);
-
 	// Proceed to fill the table with the rest of the tweets
-	var blocksDIV = $('div#chainData>table>tbody');
+	var blocksDIV = $('div.chainData>table>tbody', domelement);
 	blocksDIV.empty();
 	for(var block of blocks) {
 		var linktext = location.protocol + '//twitter.com/' + block.Twitter_user_screen_name + '/status/' + block.id;
 		blocksDIV.append($('<tr />').append([
 			$('<td />', { text: block.block_number, }),
 			$('<td />', { text: block.Twitter_user_screen_name, }),
-			$('<td />', { text: block.text, }),
-			$('<td />', { text: block.Twitter_created_at, }),
+			$('<td />', { text: block.text, title: block.text,}),
+			// $('<td />', { text: block.Twitter_created_at, }),
 			$('<td />').append([
 				$('<a />', {
 					href: linktext,
 					target: '_blank',
 					text: linktext,
+					title: linktext,
 				}),
 			]),
 		]));
 	}
 
 	if(!no_scroll)
-		$('body').scrollTop($('#latestBlock').offset().top);
+		$('body').scrollTop(domelement.offset().top);
 }
 
 function getAlert(text) {
