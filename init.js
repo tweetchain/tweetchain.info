@@ -21,6 +21,7 @@ $(document).ready(() => {
 	// twttr.ready(function() {
 		getLongestValidChain('legacy', $('#latestLegacyBlock'), false);
 		getLongestValidChain('strict100', $('#latestStrict100Block'));
+		getTopTenBalances($('#twitHodlers'));
 	// });
 });
 
@@ -38,10 +39,12 @@ function search(submitBTN) {
 }
 
 function getLongestValidChain(protocol = 'legacy', domelement = $('#latestLegacyBlock'), skiptokens = true) {
-
 	$('div#loader').show();
-	jQuery.getJSON(TWEETCHAIN_API
-			+ '/getlatest?protocol=' + protocol +'&count=200&start=0', {}, function(data) {
+	jQuery.getJSON(TWEETCHAIN_API + '/getlatest', {
+		protocol: protocol,
+		count: 200,
+		start: 0,
+	}, function(data) {
 		fillBlockDOM('Longest Valid Chain', data, domelement, true);
 
 		// Set some 'extra' data
@@ -60,26 +63,26 @@ function getLongestValidChain(protocol = 'legacy', domelement = $('#latestLegacy
 
 			// In circulation
 			$('span#tokenCirculation').text(total_tokens);
-
-			const ordered_hodlers = Object.keys(hodlers).map(function(key) {
-				return [key, hodlers[key]];
-			}).sort(function(a, b) {
-				return b[1] - a[1];
-			});
-
-			const rows = [];
-			for(const hodler of ordered_hodlers) {
-				rows.push($('<tr />').append([
-					$('<td />').append($('<a />', {
-							href: 'https://twitter.com/' + hodler[0] + '/',
-							text: hodler[0],
-							target: '_blank',
-						})),
-					$('<td />', { text: hodler[1], }),
-				]))
-			}
-			$('table#twitHodlers>tbody').html(rows);
 		}
+		$('div#loader').hide();
+	});
+}
+
+function getTopTenBalances(protocol = 'legacy', domelement = $('#twitHodlers'), skiptokens = true) {
+	$('div#loader').show();
+	jQuery.getJSON(TWEETCHAIN_API + '/gettop10balances', {}, function(data) {
+		let rows = [];
+		for(let hodler of data.balances) {
+			rows.push($('<tr />').append([
+				$('<td />').append($('<a />', {
+						href: 'https://twitter.com/' + hodler.Twitter_user_screen_name + '/',
+						text: hodler.Twitter_user_screen_name,
+						target: '_blank',
+					})),
+				$('<td />', { text: hodler.balance.match(/([0-9]{0,}\.?[0-9]{0,8})/)[1], }),
+			]))
+		}
+		$('table#twitHodlers>tbody').html(rows);
 		$('div#loader').hide();
 	});
 }
