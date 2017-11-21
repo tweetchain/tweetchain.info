@@ -117,6 +117,11 @@ function fillBlockDOM(title, blocks, domelement = $('#latestLegacyBlock'), no_sc
 	blocksDIV.empty();
 	for(var block of blocks) {
 		var linktext = location.protocol + '//twitter.com/' + block.Twitter_user_screen_name + '/status/' + block.id;
+
+		var otslink = location.protocol + '//opentimestamps.org/info.html?ots=';
+		if(block.upgraded_ots) otslink += block.upgraded_ots;
+		else otslink += block.ots;
+
 		blocksDIV.append($('<tr />').append([
 			$('<td />', { text: block.block_number, }),
 			$('<td />', { text: block.Twitter_user_screen_name, }),
@@ -128,6 +133,13 @@ function fillBlockDOM(title, blocks, domelement = $('#latestLegacyBlock'), no_sc
 					target: '_blank',
 					text: linktext,
 					title: linktext,
+				}),
+				$('<br />'),
+				$('<a />', {
+					href: otslink,
+					target: '_blank',
+					text: 'OpenTimestamps.org',
+					title: 'OpenTimestamps.org',
 				}),
 			]),
 		]));
