@@ -16,13 +16,16 @@
 		<script src="init.js"></script>
 
 		<style>
-			div.chainData table>tbody>tr>td:nth-child(3),
-			div.chainData table>tbody>tr>td:nth-child(4) {
-				max-width: 300px;
-				overflow: hidden;
-				text-overflow: ellipsis;
+			div.chainData table>thead th {
 				white-space: nowrap;
 			}
+			/* div.chainData table>tbody>tr>td:nth-child(3), */
+			/* div.chainData table>tbody>tr>td:nth-child(4) { */
+			/* 	max-width: 300px; */
+			/* 	overflow: hidden; */
+			/* 	text-overflow: ellipsis; */
+			/* 	white-space: nowrap; */
+			/* } */
 
 			table#twitHodlers > tbody td:first-child {
 				max-width: 100px;
@@ -252,33 +255,8 @@ Check out this new awesome ICO! TweetChain.info
 					<h2>TweetChain Block Explorer</h2>
 					<br />
 
-					<section class="row text-center placeholders">
-						<div id="latestLegacyBlock" class="col-6">
-							<h2 class="chainTitle">Longest Legacy Chain</h2>
-							<div class="chainData table-responsive">
-								<table class="table table-striped table-sm table-responsive">
-									<thead>
-										<tr>
-											<th>Block #</th>
-											<th>User</th>
-											<th>Quote</th>
-											<th>Link</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<!--
-											<td>1001</td>
-											<td>awesomeuser</td>
-											<td>test tests</td>
-											<td>http://test.com</td>
-											-->
-										</tr>
-									</tbody>
-								</table>
-							</div>
-						</div>
-						<div id="latestStrict100Block" class="col-6">
+					<section id="latestStrict100Block">
+						<!-- <div id="latestStrict100Block"> -->
 							<h2 class="chainTitle">Longest Strict100 Chain</h2>
 							<div class="chainData table-responsive">
 								<table class="table table-striped table-sm table-responsive">
@@ -302,7 +280,7 @@ Check out this new awesome ICO! TweetChain.info
 									</tbody>
 								</table>
 							</div>
-						</div>
+						<!-- </div> -->
 						<!--
 						<div class="col-12 col-sm-12 placeholder">
 							<h4>Latest Block</h4>

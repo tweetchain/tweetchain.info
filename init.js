@@ -19,8 +19,8 @@ $(document).ready(() => {
 	// } (document, "script", "twitter-wjs"));
 
 	// twttr.ready(function() {
-		getLongestValidChain('legacy', $('#latestLegacyBlock'), false);
-		getLongestValidChain('strict100', $('#latestStrict100Block'));
+		// getLongestValidChain('legacy', $('#latestLegacyBlock'), false);
+		getLongestValidChain('strict100', $('#latestStrict100Block'), false);
 	// });
 });
 
@@ -37,7 +37,7 @@ function search(submitBTN) {
 	return false;
 }
 
-function getLongestValidChain(protocol = 'legacy', domelement = $('#latestLegacyBlock'), skiptokens = true) {
+function getLongestValidChain(protocol = 'legacy', domelement = $('#latestStrict100Block'), skiptokens = true) {
 
 	$('div#loader').show();
 	jQuery.getJSON(TWEETCHAIN_API
@@ -93,7 +93,7 @@ function getChain(block_id) {
 	});
 }
 
-function fillBlockDOM(title, blocks, domelement = $('#latestLegacyBlock'), no_scroll = false) {
+function fillBlockDOM(title, blocks, domelement = $('#latestStrict100Block'), no_scroll = false) {
 	if(!blocks || !blocks.length) {
 		var my_alert = getAlert('No data retrieved!');
 		$('main').prepend(my_alert);
@@ -106,7 +106,7 @@ function fillBlockDOM(title, blocks, domelement = $('#latestLegacyBlock'), no_sc
 	// // Create and place
 	// twttr.widgets.createTweet(
 	// 	blocks[0].id,
-	// 	document.getElementById('latestLegacyBlock'),
+	// 	document.getElementById('latestStrict100Block'),
 	// 	{
 	// 		theme: 'light'
 	// 	}
