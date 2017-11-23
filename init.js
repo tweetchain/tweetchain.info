@@ -37,7 +37,7 @@ function search(submitBTN) {
 	return false;
 }
 
-function getLongestValidChain(protocol = 'legacy', domelement = $('#latestLegacyBlock'), skiptokens = true) {
+function getLongestValidChain(protocol = 'strict100', domelement = $('#latestStrict100Block'), skiptokens = true) {
 
 	$('div#loader').show();
 	jQuery.getJSON(TWEETCHAIN_API
@@ -93,7 +93,7 @@ function getChain(block_id) {
 	});
 }
 
-function fillBlockDOM(title, blocks, domelement = $('#latestLegacyBlock'), no_scroll = false) {
+function fillBlockDOM(title, blocks, domelement = $('#latestStrict100Block'), no_scroll = false) {
 	if(!blocks || !blocks.length) {
 		var my_alert = getAlert('No data retrieved!');
 		$('main').prepend(my_alert);
