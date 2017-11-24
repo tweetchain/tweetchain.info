@@ -26,6 +26,21 @@
 			/* 	text-overflow: ellipsis; */
 			/* 	white-space: nowrap; */
 			/* } */
+			
+			/* I placed this here because we can't see the links in the strict100 table */
+			div.chainData table tbody th td {
+				overflow: auto;
+			}
+			/* This is so every table section in the strict100 table can be edited specifically
+			.tBlockNumb {
+			}
+			.tUser {
+			}
+			.tQuote {
+			}
+			.tLinks {
+			}
+			*/
 
 			table#twitHodlers > tbody td:first-child {
 				max-width: 100px;
@@ -273,11 +288,11 @@ Check out this new awesome "ICO"! TweetChain.info</code></pre>
 									</thead>
 									<tbody>
 										<tr>
-											<!--
-											<td>1001</td>
-											<td>awesomeuser</td>
-											<td>2017-11-13T16:23:15.000Z</td>
-											<td>http://test.com</td>
+											<!-- This could be possible, perhaps it would be better done in Javascript though.
+											<td class="tBlockNum">1001</td>
+											<td class="tUser">awesomeuser</td>
+											<td class="tQuote">2017-11-13T16:23:15.000Z</td>
+											<td class="tLinks">http://test.com</td>
 											-->
 										</tr>
 									</tbody>
