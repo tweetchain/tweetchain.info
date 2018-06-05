@@ -117,7 +117,7 @@ function fillBlockDOM(title, blocks, domelement = $('#latestStrict100Block'), no
 	for(var block of blocks) {
 		var linktext = location.protocol + '//twitter.com/' + block.Twitter_user_screen_name + '/status/' + block.id;
 
-		var otslink = location.protocol + '//opentimestamps.org/info.html?ots=';
+		var otslink = location.protocol + '//opentimestamps.org/info/?';
 		if(block.upgraded_ots) otslink += block.upgraded_ots;
 		else otslink += block.ots;
 
