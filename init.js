@@ -40,7 +40,7 @@ function search(submitBTN) {
 function getLongestValidChain(protocol = 'strict100', domelement = $('#latestStrict100Block'), skiptokens = true) {
 	$('div#loader').show();
 	jQuery.getJSON(TWEETCHAIN_API
-			+ '/getlatest?protocol=' + protocol +'&count=200&start=0', {}, function(data) {
+			+ '/getlatest?protocol=' + protocol +'&count=500&start=0', {}, function(data) {
 		fillBlockDOM('Longest Valid Chain', data, domelement, true);
 
 		// Set some 'extra' data
@@ -86,7 +86,7 @@ function getLongestValidChain(protocol = 'strict100', domelement = $('#latestStr
 function getChain(block_id) {
 	$('div#loader').show();
 	jQuery.getJSON(TWEETCHAIN_API
-			+ '/getblock?id='+block_id+'&count=200&start=0', {}, function(data) {
+			+ '/getblock?id='+block_id+'&count=500&start=0', {}, function(data) {
 		fillBlockDOM('Chain Data', data);
 		$('div#loader').hide();
 	});
